@@ -4,6 +4,17 @@ from django.contrib.auth.models import User
 from base.models import BaseModel
 
 
+class Reference(BaseModel):
+    """
+    A reference is a short note on any term introduced in any project
+    """
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=2000)
+
+    def __str__(self):
+        return self.title
+
+
 class Project(BaseModel):
     """
     A Gaia project is the leading entity that a user can create.
