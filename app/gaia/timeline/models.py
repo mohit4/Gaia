@@ -19,3 +19,21 @@ class Timeline(BaseModel):
 
     def __str__(self):
         return f"{self.era} : {self.start_period} - {self.end_period} {self.label}"
+
+
+class Event(BaseModel):
+    """
+    A notable event that has taken place in a timeline.
+    An event can be associated with any character or place.
+    """
+
+    heading = models.CharField(max_length=500, help_text="E.g. First World War, Battle of Bastards etc.")
+    description = models.TextField(help_text="Details of the event.")
+
+    time_started = models.CharField(max_length=20, help_text="E.g. 1914, 320 BC etc.")
+    time_ended = models.CharField(max_length=20, help_text="E.g. 1918, Present etc.")
+
+    timeline = models.ForeignKey(Timeline, on_delete=models.CASCADE, related_name="events")
+
+    def __str__(self):
+        return f"{self.heading} : Started in {self.time_started} - Ended in {self.time_ended}"
