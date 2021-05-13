@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'base',
     'project',
     'timeline',
+    'place',
 ]
 
 MIDDLEWARE = [
