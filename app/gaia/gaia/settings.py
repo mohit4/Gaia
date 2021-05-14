@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'timeline',
     'place',
     'resources',
+    'tool',
+    'faction',
 ]
 
 MIDDLEWARE = [
