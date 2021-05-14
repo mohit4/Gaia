@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'resources',
     'tool',
     'faction',
+    'character',
 ]
 
 MIDDLEWARE = [
