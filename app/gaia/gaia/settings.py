@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'project',
     'timeline',
     'place',
+    'resources',
 ]
 
 MIDDLEWARE = [
