@@ -15,6 +15,9 @@ class Reference(BaseModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("project:reference-detail", kwargs={"pk": self.pk})
+
 
 class Project(BaseModel):
     """

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid my-2">
+    <div class="row">
+        <div class="col-12">
+
+<div class="card shadow mb-5 bg-white rounded">
+  <div class="card-header">
+    <h3>Total reference(s) : {{ references.count }}</h3>
+    <hr>
+    <a href="{% url 'project:reference-create' %}" class="btn btn-primary">New reference</a>
+  </div>
+  <div class="card-body">
+    <div class="list-group">
+      {% for reference in references %}
+        <a href="{% url 'project:reference-detail' pk=reference.pk %}" class="list-group-item list-group-item-action">{{ reference.title }}</a>
+      {% empty %}
+        No reference(s) right now!
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
