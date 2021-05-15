@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid my-2">
+    <div class="row">
+        <div class="col-12">
+
+<div class="card shadow mb-5 bg-white rounded">
+  <div class="card-header">
+    <h3>Total projects : {{ projects.count }}</h3>
+    <hr>
+    <a href="{% url 'project:project-create' %}" class="btn btn-primary">New Project</a>
+  </div>
+  <div class="card-body">
+    <div class="list-group">
+      {% for project in projects %}
+        <a href="{% url 'project:project-detail' pk=project.pk %}" class="list-group-item list-group-item-action">{{ project.title }}</a>
+      {% empty %}
+        No projects right now!
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

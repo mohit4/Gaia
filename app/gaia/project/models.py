@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from base.models import BaseModel
 
@@ -28,3 +29,6 @@ class Project(BaseModel):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("project:project-detail", kwargs={"pk": self.pk})
