@@ -41,3 +41,6 @@ class Event(BaseModel):
 
     def __str__(self):
         return f"{self.heading} : Started in {self.time_started} - Ended in {self.time_ended}"
+
+    def get_absolute_url(self):
+        return reverse("place:event-detail", kwargs={"pk": self.pk})

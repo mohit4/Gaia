@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
 from .models import Place
+from .models import Event
 
 
 class PlaceListView(ListView):
@@ -53,3 +54,50 @@ class PlaceDeleteView(DeleteView):
     template_name = 'place/place_detail.html'
     model = Place
     success_url = reverse_lazy('place:place-list')
+
+
+class EventListView(ListView):
+    """
+    Listing all the event
+    """
+    template_name = 'place/event_list.html'
+    model = Event
+    context_object_name = 'events'
+
+
+class EventDetailView(DetailView):
+    """
+    Details of a event
+    """
+    template_name = 'place/event_detail.html'
+    model = Event
+    context_object_name = 'event'
+
+
+class EventCreateView(SuccessMessageMixin, CreateView):
+    """
+    Creating a new event
+    """
+    template_name = 'place/event_create.html'
+    model = Event
+    fields = ('heading', 'description', 'time_started', 'time_ended', 'place',)
+    success_message = 'New event created!'
+
+
+class EventUpdateView(SuccessMessageMixin, UpdateView):
+    """
+    Updating a new event
+    """
+    template_name = 'place/event_update.html'
+    model = Event
+    fields = ('description', 'time_started', 'time_ended', 'place',)
+    success_message = 'Event updated!'
+
+
+class EventDeleteView(DeleteView):
+    """
+    Deleting an existing event
+    """
+    template_name = 'place/event_detail.html'
+    model = Event
+    success_url = reverse_lazy('event:event-list')
