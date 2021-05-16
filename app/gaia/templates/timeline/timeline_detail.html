@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% include 'messages.html' %}
+
+{% block content %}
+
+<div class="container-fluid my-2">
+  <div class="row">
+    <div class="col-12">
+
+<div class="card shadow mb-5 bg-white rounded">
+  <div class="card-header">
+    <h3>{{ timeline.era }}</h3>
+  </div>
+  <div class="card-body">
+    <h5>{{ timeline.project.title }}</h5>
+    {{ timeline.start_period }} - {{ timeline.end_period }} {{ timeline.label }}
+  </div>
+  <div class="card-footer">
+    <a href="{% url 'timeline:timeline-update' pk=timeline.pk %}" class="btn btn-primary">Edit</a>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#deleteConfirmationModalCenter">Delete</button>
+    <br>
+    <br>
+    <a href="{% url 'timeline:timeline-list' %}">Back to timeline list</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteConfirmationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Confirm delete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This will delete the timeline.
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="{% url 'timeline:timeline-delete' pk=timeline.pk %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Delete" />
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

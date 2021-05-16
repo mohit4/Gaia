@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from base.models import BaseModel
 from project.models import Project
@@ -19,3 +20,6 @@ class Timeline(BaseModel):
 
     def __str__(self):
         return f"{self.era} : {self.start_period} - {self.end_period} {self.label}"
+
+    def get_absolute_url(self):
+        return reverse("timeline:timeline-detail", kwargs={"pk": self.pk})
