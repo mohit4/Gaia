@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% include 'messages.html' %}
+
+{% block content %}
+
+<div class="container-fluid my-2">
+  <div class="row">
+    <div class="col-12">
+
+<div class="card shadow mb-5 bg-white rounded">
+  <div class="card-header">
+    <h3>{{ place.name }}</h3>
+  </div>
+  <div class="card-body">
+    <p>{{ place.description }}</p>
+    Domain : 
+    {% if not place.domain  %}
+      No Domain
+    {% else %}
+      <a href="{% url 'place:place-detail' pk=place.domain.pk %}">{{ place.domain.name }}</a>
+    {% endif %}
+    <br>
+    Timeline : <a href="{% url 'timeline:timeline-detail' pk=place.timeline.pk %}">{{ place.timeline.era }}</a>
+  </div>
+  <div class="card-footer">
+    <a href="{% url 'place:place-update' pk=place.pk %}" class="btn btn-primary">Edit</a>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#deleteConfirmationModalCenter">Delete</button>
+    <br>
+    <br>
+    <a href="{% url 'place:place-list' %}">Back to place list</a>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteConfirmationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Confirm delete?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This will delete the place.
+      </div>
+      <div class="modal-footer">
+        <form method="POST" action="{% url 'place:place-delete' pk=place.pk %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Delete" />
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

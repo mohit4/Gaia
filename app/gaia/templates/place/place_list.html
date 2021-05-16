@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid my-2">
+    <div class="row">
+        <div class="col-12">
+
+<div class="card shadow mb-5 bg-white rounded">
+  <div class="card-header">
+    <h3>Total place(s) : {{ places.count }}</h3>
+    <hr>
+    <a href="{% url 'place:place-create' %}" class="btn btn-primary">New place</a>
+  </div>
+  <div class="card-body">
+    <div class="list-group">
+      {% for place in places %}
+        <a href="{% url 'place:place-detail' pk=place.pk %}" class="list-group-item list-group-item-action">{{ place.name }}</a>
+      {% empty %}
+        No place(s) right now!
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
